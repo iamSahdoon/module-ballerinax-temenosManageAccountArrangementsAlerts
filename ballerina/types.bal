@@ -246,7 +246,7 @@ public type ExternalSubscribersAlertRequestsResponseBodyInner record {
     @constraint:String {maxLength: 35}
     string eventId?;
     # Identifier of the external customer
-    @constraint:Number {maxValue: 35}
+    @constraint:Number {maxValue: 1000000000000000}
     decimal externalCustomerId?;
     # Contains the external user identifier for which the consent is created
     @constraint:String {maxLength: 35}
@@ -255,10 +255,10 @@ public type ExternalSubscribersAlertRequestsResponseBodyInner record {
     @constraint:String {maxLength: 35}
     string displayName?;
     # Identifier of the customer
-    @constraint:Number {maxValue: 35}
+    @constraint:Number {maxValue: 1000000000000000}
     decimal customerId?;
     # Event Type of the corporate action
-    @constraint:String {maxLength: 35}
+    @constraint:String {maxLength: 100}
     string eventType?;
     # Input is the valid field name for the metrics evaluation of alerts
     ExternalSubscribersAlertRequestsResponseBodyInner_fields[] fields?;
@@ -364,7 +364,7 @@ public type AlertSubscriptionResponseBody record {
     @constraint:String {maxLength: 35}
     string eventId?;
     # Identifier of the external customer
-    @constraint:String {maxLength: 35}
+    @constraint:String {maxLength: 100}
     string externalCustomerId?;
     # Enables an alert service
     @constraint:String {maxLength: 35}
@@ -375,7 +375,7 @@ public type AlertSubscriptionResponseBody record {
     # Identifier of Department Account Officer
     AlertSubscriptionBodyAccountOfficers[] accountOfficers?;
     # Identifier of the customer
-    @constraint:String {maxLength: 35}
+    @constraint:String {maxLength: 100}
     string customerId?;
     # Input is the valid field name for the metrics evaluation of alerts
     AlertSubscriptionBodyFields[] fields?;
@@ -416,5 +416,5 @@ public type ExternalSubscribersAlertRequestsResponse record {
 
 # Provides API key configurations needed when communicating with a remote HTTP endpoint.
 public type ApiKeysConfig record {|
-    string authorization;
+    string apikey;
 |};

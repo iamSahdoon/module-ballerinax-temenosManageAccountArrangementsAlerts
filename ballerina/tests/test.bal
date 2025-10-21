@@ -13,3 +13,31 @@
 // specific language governing permissions and limitations
 // under the License.
 
+import ballerina/test;
+import ballerina/io;
+// import ballerina/http;
+
+configurable ApiKeysConfig apiKeyConfig = ?;
+configurable string serviceUrl = "https://api.temenos.com/api/v1.1.0/holdings";
+
+
+ConnectionConfig config = {
+    auth: apiKeyConfig
+};
+
+final Client temenos = check new Client(config, serviceUrl);
+
+@test:Config {
+    groups: ["get_test1"]
+}
+isolated function testGetExternalSubscriptions() returns error? {
+    ExternalSubscribersAlertRequestsResponse|error response = temenos->/arrangements/alertRequests/externalSubscriptions.get();
+    if response is ExternalSubscribersAlertRequestsResponse {
+        io:println("Success Response: ", response);
+        test:assertTrue(response is ExternalSubscribersAlertRequestsResponse, "Response failed");
+        test:assertTrue(response.header?.status == "success", "Response status is not success");
+    } else {
+        // io:println("Error Response: ", response.message());
+        test:assertFail("Test failed with error: " + response.message());
+    }
+}

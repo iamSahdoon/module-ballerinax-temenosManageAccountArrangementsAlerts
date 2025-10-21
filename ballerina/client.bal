@@ -12,7 +12,7 @@ public isolated client class Client {
     # + config - The configurations to be used when initializing the `connector` 
     # + serviceUrl - URL of the target service 
     # + return - An error if connector initialization failed 
-    public isolated function init(ConnectionConfig config, string serviceUrl = "https://api.temenos.com/api/v1.1.0//holdings") returns error? {
+    public isolated function init(ConnectionConfig config, string serviceUrl = "https://api.temenos.com/api/v1.1.0/holdings") returns error? {
         http:ClientConfiguration httpClientConfig = {httpVersion: config.httpVersion, http1Settings: config.http1Settings, http2Settings: config.http2Settings, timeout: config.timeout, forwarded: config.forwarded, followRedirects: config.followRedirects, poolConfig: config.poolConfig, cache: config.cache, compression: config.compression, circuitBreaker: config.circuitBreaker, retryConfig: config.retryConfig, cookieConfig: config.cookieConfig, responseLimits: config.responseLimits, secureSocket: config.secureSocket, proxy: config.proxy, socketConfig: config.socketConfig, validation: config.validation, laxDataBinding: config.laxDataBinding};
         if config.auth is ApiKeysConfig {
             self.apiKeyConfig = (<ApiKeysConfig>config.auth).cloneReadOnly();
@@ -33,7 +33,7 @@ public isolated client class Client {
         string resourcePath = string `/arrangements/${getEncodedUri(arrangementId)}/alertRequests`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
-            headerValues["Authorization"] = self.apiKeyConfig?.authorization;
+            headerValues["apikey"] = self.apiKeyConfig?.apikey;
         }
         resourcePath = resourcePath + check getPathForQueryParam(queries);
         map<string|string[]> httpHeaders = http:getHeaderMap(headerValues);
@@ -50,7 +50,7 @@ public isolated client class Client {
         string resourcePath = string `/accounts/${getEncodedUri(accountId)}/alertEvents`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
-            headerValues["Authorization"] = self.apiKeyConfig?.authorization;
+            headerValues["apikey"] = self.apiKeyConfig?.apikey;
         }
         resourcePath = resourcePath + check getPathForQueryParam(queries);
         map<string|string[]> httpHeaders = http:getHeaderMap(headerValues);
@@ -66,7 +66,7 @@ public isolated client class Client {
         string resourcePath = string `/arrangements/alertRequests/externalSubscriptions`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
-            headerValues["Authorization"] = self.apiKeyConfig?.authorization;
+            headerValues["apikey"] = self.apiKeyConfig?.apikey;
         }
         resourcePath = resourcePath + check getPathForQueryParam(queries);
         map<string|string[]> httpHeaders = http:getHeaderMap(headerValues);
@@ -83,7 +83,7 @@ public isolated client class Client {
         string resourcePath = string `/arrangements/alertRequests`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
-            headerValues["Authorization"] = self.apiKeyConfig?.authorization;
+            headerValues["apikey"] = self.apiKeyConfig?.apikey;
         }
         resourcePath = resourcePath + check getPathForQueryParam(queries);
         map<string|string[]> httpHeaders = http:getHeaderMap(headerValues);
@@ -102,7 +102,7 @@ public isolated client class Client {
         string resourcePath = string `/arrangements/alertRequests/${getEncodedUri(alertRequestId)}`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
-            headerValues["Authorization"] = self.apiKeyConfig?.authorization;
+            headerValues["apikey"] = self.apiKeyConfig?.apikey;
         }
         resourcePath = resourcePath + check getPathForQueryParam(queries);
         map<string|string[]> httpHeaders = http:getHeaderMap(headerValues);
