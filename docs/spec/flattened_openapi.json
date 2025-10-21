@@ -1,0 +1,1465 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Manage Arrangement Account alerts",
+    "description" : "Retrieves alert details for accounts",
+    "version" : "v1.1.0"
+  },
+  "servers" : [ {
+    "url" : "https://api.temenos.com/api/v1.1.0/"
+  } ],
+  "security" : [ {
+    "apiKey" : [ ]
+  } ],
+  "tags" : [ ],
+  "paths" : {
+    "/holdings/arrangements/{arrangementId}/alertRequests" : {
+      "get" : {
+        "tags" : [ ],
+        "summary" : "Retrieves the subscribed alerts details for an arrangement",
+        "description" : "Retrieves subscribed alerts details",
+        "operationId" : "getSubscribedAlerts",
+        "parameters" : [ {
+          "name" : "arrangementId",
+          "in" : "path",
+          "description" : "Indicates an unique identifier of an account",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "customerId",
+          "in" : "query",
+          "description" : "Identifier of the customer",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "subscribe",
+          "in" : "query",
+          "description" : "Enables an alert service",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "alertRequestId",
+          "in" : "query",
+          "description" : "The unique identifier of the alert request.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "page_size",
+          "in" : "query",
+          "description" : "The total number of records per page",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "page_start",
+          "in" : "query",
+          "description" : "The record from which the response should be displayed",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "page_token",
+          "in" : "query",
+          "description" : "Unique id expected to get as part of response from t24 on every enquiry request.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "credentials",
+          "in" : "header",
+          "description" : "Username and password to authenticate the API against core-banking.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "companyId",
+          "in" : "header",
+          "description" : "Identifier of the lead company of the underlying Entity/Company/Branch for the respective contract for customer data protection purposes. Example US0010001.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "deviceId",
+          "in" : "header",
+          "description" : "Identifies the device type",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "userRole",
+          "in" : "header",
+          "description" : "User who initiated the transaction",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "disablePagination",
+          "in" : "header",
+          "description" : "Indicates the pagination header attributes availability. If set to 'true', it fetches all the data",
+          "schema" : {
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "SubscribedAlertsResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SubscribedAlertsResponse"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "QueryErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/QueryErrorResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "BusinessQueryErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BusinessQueryErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "SystemQueryErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SystemQueryErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/holdings/accounts/{accountId}/alertEvents" : {
+      "get" : {
+        "tags" : [ ],
+        "summary" : "Retrieves the eligible alerts available for the account",
+        "description" : "Retrieves eligible alerts for the account",
+        "operationId" : "getEligibleEvents",
+        "parameters" : [ {
+          "name" : "accountId",
+          "in" : "path",
+          "description" : "Identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId. Accepts both IBAN & BBAN",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "page_size",
+          "in" : "query",
+          "description" : "The total number of records per page",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "page_start",
+          "in" : "query",
+          "description" : "The record from which the response should be displayed",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "page_token",
+          "in" : "query",
+          "description" : "Unique id expected to get as part of response from t24 on every enquiry request.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "credentials",
+          "in" : "header",
+          "description" : "Username and password to authenticate the API against core-banking.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "companyId",
+          "in" : "header",
+          "description" : "Identifier of the lead company of the underlying Entity/Company/Branch for the respective contract for customer data protection purposes. Example US0010001.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "deviceId",
+          "in" : "header",
+          "description" : "Identifies the device type",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "userRole",
+          "in" : "header",
+          "description" : "User who initiated the transaction",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "disablePagination",
+          "in" : "header",
+          "description" : "Indicates the pagination header attributes availability. If set to 'true', it fetches all the data",
+          "schema" : {
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "EligibleEventsResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EligibleEventsResponse"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "QueryErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/QueryErrorResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "BusinessQueryErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BusinessQueryErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "SystemQueryErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SystemQueryErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/holdings/arrangements/alertRequests/externalSubscriptions" : {
+      "get" : {
+        "tags" : [ ],
+        "summary" : "Retrieves alert requests for external subscriptions.",
+        "description" : "Retrieves alert request details for external subscriptions such as the external customer identifier, contract reference and external user identifier.",
+        "operationId" : "getExternalSubscribersAlertRequests",
+        "parameters" : [ {
+          "name" : "eventId",
+          "in" : "query",
+          "description" : "Event identifier",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "contractReference",
+          "in" : "query",
+          "description" : "Contains the contract reference",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "customerId",
+          "in" : "query",
+          "description" : "Identifier of the customer",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "externalUserId",
+          "in" : "query",
+          "description" : "Contains the external user identifier for which the consent is created.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "externalCustomerId",
+          "in" : "query",
+          "description" : "Identifier of the external customer",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "page_size",
+          "in" : "query",
+          "description" : "The total number of records per page",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "page_start",
+          "in" : "query",
+          "description" : "The record from which the response should be displayed",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "page_token",
+          "in" : "query",
+          "description" : "Unique id expected to get as part of response from t24 on every enquiry request.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "credentials",
+          "in" : "header",
+          "description" : "Username and password to authenticate the API against core-banking.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "companyId",
+          "in" : "header",
+          "description" : "Identifier of the lead company of the underlying Entity/Company/Branch for the respective contract for customer data protection purposes. Example US0010001.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "deviceId",
+          "in" : "header",
+          "description" : "Identifies the device type",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "userRole",
+          "in" : "header",
+          "description" : "User who initiated the transaction",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "disablePagination",
+          "in" : "header",
+          "description" : "Indicates the pagination header attributes availability. If set to 'true', it fetches all the data",
+          "schema" : {
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "ExternalSubscribersAlertRequestsResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ExternalSubscribersAlertRequestsResponse"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "QueryErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/QueryErrorResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "BusinessQueryErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BusinessQueryErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "SystemQueryErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SystemQueryErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/holdings/arrangements/alertRequests" : {
+      "post" : {
+        "tags" : [ ],
+        "summary" : "Creates alert for external subscription.",
+        "description" : "Initiate an alert request or external subscription.",
+        "operationId" : "createAlertSubscription",
+        "parameters" : [ {
+          "name" : "validate_only",
+          "in" : "query",
+          "description" : "The identifier to indicate if it is set to only validate or not.",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "credentials",
+          "in" : "header",
+          "description" : "Username and password to authenticate the API against core-banking.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "companyId",
+          "in" : "header",
+          "description" : "Identifier of the lead company of the underlying Entity/Company/Branch for the respective contract for customer data protection purposes. Example US0010001.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "deviceId",
+          "in" : "header",
+          "description" : "Identifies the device type",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "userRole",
+          "in" : "header",
+          "description" : "User who initiated the transaction",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "body Payload",
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AlertSubscription"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "AlertSubscriptionResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AlertSubscriptionResponse"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "ScreenErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ScreenErrorResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "BusinessScreenErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BusinessScreenErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "SystemScreenErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SystemScreenErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name" : "payload"
+      }
+    },
+    "/holdings/arrangements/alertRequests/{alertRequestId}" : {
+      "put" : {
+        "tags" : [ ],
+        "summary" : "Updates the alert subscription details for online banking user",
+        "description" : "Update alert subscription details",
+        "operationId" : "updateAlertSubscription",
+        "parameters" : [ {
+          "name" : "alertRequestId",
+          "in" : "path",
+          "description" : "The unique identifier of the alert request.",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "validate_only",
+          "in" : "query",
+          "description" : "The identifier to indicate if it is set to only validate or not.",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "credentials",
+          "in" : "header",
+          "description" : "Username and password to authenticate the API against core-banking.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "companyId",
+          "in" : "header",
+          "description" : "Identifier of the lead company of the underlying Entity/Company/Branch for the respective contract for customer data protection purposes. Example US0010001.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "deviceId",
+          "in" : "header",
+          "description" : "Identifies the device type",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "userRole",
+          "in" : "header",
+          "description" : "User who initiated the transaction",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "body Payload",
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AlertSubscription"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "AlertSubscriptionResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AlertSubscriptionResponse"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "ScreenErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ScreenErrorResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "BusinessScreenErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BusinessScreenErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "SystemScreenErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SystemScreenErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name" : "payload"
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "QueryHeader" : {
+        "type" : "object",
+        "properties" : {
+          "audit" : {
+            "$ref" : "#/components/schemas/QueryHeaderAudit"
+          },
+          "status" : {
+            "type" : "string",
+            "description" : "Status of the API(success/failed)"
+          },
+          "page_size" : {
+            "type" : "integer",
+            "description" : "The total number of records per page",
+            "format" : "int32"
+          },
+          "page_start" : {
+            "type" : "integer",
+            "description" : "The record from which the response should be displayed",
+            "format" : "int32"
+          },
+          "total_size" : {
+            "type" : "integer",
+            "description" : "The total number of records present",
+            "format" : "int32"
+          },
+          "page_token" : {
+            "type" : "string",
+            "description" : "Unique id expected to get as part of response from t24 on every enquiry request"
+          }
+        }
+      },
+      "SubscribedAlertsResponse" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/QueryHeader"
+          },
+          "body" : {
+            "$ref" : "#/components/schemas/SubscribedAlertsResponseBody"
+          }
+        },
+        "description" : "SubscribedAlertsResponse"
+      },
+      "SubscribedAlertsResponseBody" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/SubscribedAlertsResponseBodyInner"
+        }
+      },
+      "ErrorHeader" : {
+        "type" : "object",
+        "properties" : {
+          "audit" : {
+            "$ref" : "#/components/schemas/QueryHeaderAudit"
+          },
+          "status" : {
+            "type" : "string",
+            "description" : "Status of the API(success/failed)"
+          }
+        }
+      },
+      "QueryErrorResponse" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/ErrorHeader"
+          },
+          "error" : {
+            "$ref" : "#/components/schemas/QueryErrorResponseBody"
+          }
+        },
+        "description" : "QueryErrorResponse"
+      },
+      "QueryErrorResponseBody" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "string",
+            "description" : "The identifier of the error message"
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "The actual t24 error message "
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "The identifier of error type: "
+          }
+        }
+      },
+      "BusinessQueryErrorResponse" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/ErrorHeader"
+          },
+          "error" : {
+            "$ref" : "#/components/schemas/BusinessQueryErrorResponseBody"
+          }
+        },
+        "description" : "BusinessQueryErrorResponse"
+      },
+      "BusinessQueryErrorResponseBody" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "string",
+            "description" : "The identifier of the error message"
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "The actual t24 error message for bad requests"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "The identifier of error type: Business"
+          }
+        }
+      },
+      "SystemQueryErrorResponse" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/ErrorHeader"
+          },
+          "error" : {
+            "$ref" : "#/components/schemas/SystemQueryErrorResponseBody"
+          }
+        },
+        "description" : "SystemQueryErrorResponse"
+      },
+      "SystemQueryErrorResponseBody" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "string",
+            "description" : "The identifier of the error message"
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "The actual t24 error message caused by server"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "The identifier of error type: System"
+          }
+        }
+      },
+      "EligibleEventsResponse" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/QueryHeader"
+          },
+          "body" : {
+            "$ref" : "#/components/schemas/EligibleEventsResponseBody"
+          }
+        },
+        "description" : "EligibleEventsResponse"
+      },
+      "EligibleEventsResponseBody" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/EligibleEventsResponseBodyInner"
+        }
+      },
+      "ExternalSubscribersAlertRequestsResponse" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/QueryHeader"
+          },
+          "body" : {
+            "$ref" : "#/components/schemas/ExternalSubscribersAlertRequestsResponseBody"
+          }
+        },
+        "description" : "ExternalSubscribersAlertRequestsResponse"
+      },
+      "ExternalSubscribersAlertRequestsResponseBody" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/ExternalSubscribersAlertRequestsResponseBodyInner"
+        }
+      },
+      "PayloadHeader" : {
+        "type" : "object",
+        "properties" : {
+          "override" : {
+            "$ref" : "#/components/schemas/PayloadHeaderOverride"
+          },
+          "audit" : {
+            "$ref" : "#/components/schemas/PayloadHeaderAudit"
+          }
+        }
+      },
+      "AlertSubscription" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/PayloadHeader"
+          },
+          "body" : {
+            "$ref" : "#/components/schemas/AlertSubscriptionBody"
+          }
+        },
+        "description" : "AlertSubscription"
+      },
+      "AlertSubscriptionBody" : {
+        "type" : "object",
+        "properties" : {
+          "accountOfficers" : {
+            "type" : "array",
+            "description" : "Identifier of Department Account Officer",
+            "items" : {
+              "$ref" : "#/components/schemas/AlertSubscriptionBodyAccountOfficers"
+            }
+          },
+          "fields" : {
+            "type" : "array",
+            "description" : "Input is the valid field name for the metrics evaluation of alerts",
+            "items" : {
+              "$ref" : "#/components/schemas/AlertSubscriptionBodyFields"
+            }
+          },
+          "eventId" : {
+            "maxLength" : 35,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Event identifier"
+          },
+          "contractReference" : {
+            "maxLength" : 35,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Contains the contract reference"
+          },
+          "customerId" : {
+            "maxLength" : 35,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Identifier of the customer"
+          },
+          "subscribe" : {
+            "maxLength" : 35,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Enables an alert service"
+          },
+          "externalUserId" : {
+            "maxLength" : 35,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Contains the external user identifier for which the consent is created."
+          },
+          "externalCustomerId" : {
+            "maxLength" : 35,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Identifier of the external customer"
+          }
+        }
+      },
+      "ScreenHeader" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "The Identifier of the record created"
+          },
+          "status" : {
+            "type" : "string",
+            "description" : "Status of the API(success/failed)"
+          },
+          "transactionStatus" : {
+            "type" : "string",
+            "description" : "The status of the transaction"
+          },
+          "uniqueIdentifier" : {
+            "type" : "string",
+            "description" : "The unique identifier/Message Reference of the record created."
+          },
+          "audit" : {
+            "$ref" : "#/components/schemas/QueryHeaderAudit"
+          }
+        }
+      },
+      "AlertSubscriptionResponse" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/ScreenHeader"
+          },
+          "body" : {
+            "$ref" : "#/components/schemas/AlertSubscriptionResponseBody"
+          }
+        },
+        "description" : "AlertSubscriptionResponse"
+      },
+      "AlertSubscriptionResponseBody" : {
+        "type" : "object",
+        "properties" : {
+          "accountOfficers" : {
+            "type" : "array",
+            "description" : "Identifier of Department Account Officer",
+            "items" : {
+              "$ref" : "#/components/schemas/AlertSubscriptionBodyAccountOfficers"
+            }
+          },
+          "fields" : {
+            "type" : "array",
+            "description" : "Input is the valid field name for the metrics evaluation of alerts",
+            "items" : {
+              "$ref" : "#/components/schemas/AlertSubscriptionBodyFields"
+            }
+          },
+          "eventId" : {
+            "maxLength" : 35,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Event identifier"
+          },
+          "contractReference" : {
+            "maxLength" : 35,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Contains the contract reference"
+          },
+          "customerId" : {
+            "maxLength" : 35,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Identifier of the customer"
+          },
+          "subscribe" : {
+            "maxLength" : 35,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Enables an alert service"
+          },
+          "externalUserId" : {
+            "maxLength" : 35,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Contains the external user identifier for which the consent is created."
+          },
+          "externalCustomerId" : {
+            "maxLength" : 35,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Identifier of the external customer"
+          }
+        }
+      },
+      "overrideBody" : {
+        "type" : "object",
+        "properties" : {
+          "overrideDetails" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/OverrideBodyOverrideDetails"
+            }
+          }
+        }
+      },
+      "ScreenErrorResponse" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/ErrorHeader"
+          },
+          "error" : {
+            "$ref" : "#/components/schemas/ScreenErrorResponseBody"
+          },
+          "override" : {
+            "$ref" : "#/components/schemas/overrideBody"
+          }
+        },
+        "description" : "ScreenErrorResponse"
+      },
+      "ScreenErrorResponseBody" : {
+        "type" : "object",
+        "properties" : {
+          "errorDetails" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ScreenErrorResponseBodyErrorDetails"
+            }
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "The identifier of error type: "
+          }
+        }
+      },
+      "BusinessScreenErrorResponse" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/ErrorHeader"
+          },
+          "error" : {
+            "$ref" : "#/components/schemas/BusinessScreenErrorResponseBody"
+          },
+          "override" : {
+            "$ref" : "#/components/schemas/overrideBody"
+          }
+        },
+        "description" : "BusinessScreenErrorResponse"
+      },
+      "BusinessScreenErrorResponseBody" : {
+        "type" : "object",
+        "properties" : {
+          "errorDetails" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/BusinessScreenErrorResponseBodyErrorDetails"
+            }
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "The identifier of error type: Business"
+          }
+        }
+      },
+      "SystemScreenErrorResponse" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/ErrorHeader"
+          },
+          "error" : {
+            "$ref" : "#/components/schemas/SystemScreenErrorResponseBody"
+          },
+          "override" : {
+            "$ref" : "#/components/schemas/overrideBody"
+          }
+        },
+        "description" : "SystemScreenErrorResponse"
+      },
+      "SystemScreenErrorResponseBody" : {
+        "type" : "object",
+        "properties" : {
+          "errorDetails" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/SystemScreenErrorResponseBodyErrorDetails"
+            }
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "The identifier of error type: System"
+          }
+        }
+      },
+      "QueryHeaderAudit" : {
+        "type" : "object",
+        "properties" : {
+          "T24_time" : {
+            "type" : "integer",
+            "description" : "Time taken to response by T24",
+            "format" : "int32"
+          },
+          "versionNumber" : {
+            "type" : "string",
+            "description" : "The CURR.NO. of the record"
+          },
+          "requestParse_time" : {
+            "type" : "number",
+            "description" : "Time taken to parse the request by IRIS"
+          },
+          "responseParse_time" : {
+            "type" : "number",
+            "description" : "Time taken to parse the response by IRIS"
+          }
+        }
+      },
+      "SubscribedAlertsResponseBodyInner" : {
+        "type" : "object",
+        "properties" : {
+          "fields" : {
+            "type" : "array",
+            "description" : "Input is the valid field name for the metrics evaluation of alerts",
+            "items" : {
+              "type" : "object",
+              "properties" : {
+                "fieldDisplayName" : {
+                  "maxLength" : 50,
+                  "type" : "string",
+                  "description" : "Contains the name of the display for enrichment purposes"
+                },
+                "operand" : {
+                  "maxLength" : 35,
+                  "type" : "string",
+                  "description" : "This field along with fieldName and value, defines the conditions for the alert to be triggered."
+                },
+                "value" : {
+                  "maxLength" : 35,
+                  "type" : "string",
+                  "description" : "The value of the field on which the Alert criteria is based"
+                }
+              }
+            }
+          },
+          "alertRequestId" : {
+            "maxLength" : 35,
+            "type" : "string",
+            "description" : "The unique identifier of the alert request."
+          },
+          "contractReference" : {
+            "maxLength" : 35,
+            "type" : "string",
+            "description" : "Contains the contract reference"
+          },
+          "displayName" : {
+            "maxLength" : 35,
+            "type" : "string",
+            "description" : "Contains the name used for display or enrichment purposes"
+          },
+          "eventId" : {
+            "maxLength" : 35,
+            "type" : "string",
+            "description" : "Event identifier"
+          },
+          "messageGroupId" : {
+            "maxLength" : 35,
+            "type" : "string",
+            "description" : "Contains the starting message id of the conversation"
+          },
+          "accountId" : {
+            "type" : "string",
+            "description" : "Identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId. Accepts both IBAN & BBAN"
+          },
+          "versionNumber" : {
+            "maxLength" : 4,
+            "type" : "string",
+            "description" : "Current number of the record"
+          },
+          "productDescription" : {
+            "type" : "string",
+            "description" : "Indicates the description of the Product"
+          }
+        }
+      },
+      "EligibleEventsResponseBodyInner" : {
+        "type" : "object",
+        "properties" : {
+          "fields" : {
+            "type" : "array",
+            "description" : "Input is the valid field name for the metrics evaluation of alerts",
+            "items" : {
+              "type" : "object",
+              "properties" : {
+                "fieldDisplayName" : {
+                  "type" : "string",
+                  "description" : "Contains the name of the display for enrichment purposes"
+                },
+                "operand" : {
+                  "type" : "string",
+                  "description" : "This field along with fieldName and value, defines the conditions for the alert to be triggered."
+                },
+                "fieldValue" : {
+                  "type" : "string",
+                  "description" : "Value of the field"
+                }
+              }
+            }
+          },
+          "eventId" : {
+            "type" : "string",
+            "description" : "Event identifier"
+          },
+          "displayName" : {
+            "type" : "string",
+            "description" : "Contains the name used for display or enrichment purposes"
+          },
+          "displayCondition" : {
+            "type" : "string",
+            "description" : "The condition which must be pulled from the record for which the response should be displayed"
+          },
+          "messageGroupId" : {
+            "type" : "string",
+            "description" : "Contains the starting message id of the conversation"
+          },
+          "subscriptionLevel" : {
+            "type" : "string",
+            "description" : "Extra filtering and validation at the subscription level to indicate if this event can be subscribed by a customer or department or both.  If defined as GLOBAL, then the customer cannot subscribe or un-subscribe to this event.  Allowed values: - INTERNAL - EXTERNAL - BOTH - GLOBAL"
+          }
+        }
+      },
+      "ExternalSubscribersAlertRequestsResponseBodyInner" : {
+        "type" : "object",
+        "properties" : {
+          "fields" : {
+            "type" : "array",
+            "description" : "Input is the valid field name for the metrics evaluation of alerts",
+            "items" : {
+              "type" : "object",
+              "properties" : {
+                "fieldName" : {
+                  "maxLength" : 35,
+                  "type" : "string",
+                  "description" : "The name of the field"
+                },
+                "displayName" : {
+                  "maxLength" : 50,
+                  "type" : "string",
+                  "description" : "Contains the name used for display or enrichment purposes"
+                },
+                "operand" : {
+                  "maxLength" : 35,
+                  "type" : "string",
+                  "description" : "This field along with fieldName and value, defines the conditions for the alert to be triggered."
+                },
+                "value" : {
+                  "maxLength" : 35,
+                  "type" : "string",
+                  "description" : "The value of the field on which the Alert criteria is based"
+                }
+              }
+            }
+          },
+          "alertRequestId" : {
+            "maxLength" : 35,
+            "type" : "string",
+            "description" : "The unique identifier of the alert request."
+          },
+          "eventId" : {
+            "maxLength" : 35,
+            "type" : "string",
+            "description" : "Event identifier"
+          },
+          "displayName" : {
+            "maxLength" : 35,
+            "type" : "string",
+            "description" : "Contains the name used for display or enrichment purposes"
+          },
+          "eventType" : {
+            "maxLength" : 35,
+            "type" : "string",
+            "description" : "Event Type of the corporate action"
+          },
+          "contractReference" : {
+            "maxLength" : 35,
+            "type" : "string",
+            "description" : "Contains the contract reference"
+          },
+          "customerId" : {
+            "maximum" : 35,
+            "type" : "number",
+            "description" : "Identifier of the customer"
+          },
+          "externalUserId" : {
+            "maxLength" : 35,
+            "type" : "string",
+            "description" : "Contains the external user identifier for which the consent is created."
+          },
+          "externalCustomerId" : {
+            "maximum" : 35,
+            "type" : "number",
+            "description" : "Identifier of the external customer"
+          }
+        }
+      },
+      "PayloadHeaderOverrideOverrideDetails" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "The identifier of the override."
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "The actual override message."
+          },
+          "code" : {
+            "type" : "string",
+            "description" : "The code related to override message."
+          },
+          "responseCode" : {
+            "type" : "string",
+            "description" : "The user input to accept/reject the override."
+          }
+        }
+      },
+      "PayloadHeaderOverride" : {
+        "type" : "object",
+        "properties" : {
+          "overrideDetails" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PayloadHeaderOverrideOverrideDetails"
+            }
+          }
+        }
+      },
+      "PayloadHeaderAudit" : {
+        "type" : "object",
+        "properties" : {
+          "versionNumber" : {
+            "type" : "string",
+            "description" : "The CURR.NO. of the record"
+          }
+        }
+      },
+      "AlertSubscriptionBodyAccountOfficers" : {
+        "type" : "object",
+        "properties" : {
+          "accountOfficer" : {
+            "maxLength" : 35,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Identifier of Department Account Officer"
+          }
+        }
+      },
+      "AlertSubscriptionBodyFields" : {
+        "type" : "object",
+        "properties" : {
+          "fieldName" : {
+            "maxLength" : 35,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "The name of the field"
+          },
+          "displayName" : {
+            "maxLength" : 35,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Contains the name used for display or enrichment purposes"
+          },
+          "position" : {
+            "maxLength" : 35,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "The position of the given field."
+          },
+          "operand" : {
+            "maxLength" : 35,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "This field along with fieldName and value, defines the conditions for the alert to be triggered."
+          },
+          "value" : {
+            "maxLength" : 35,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "The value of the field on which the Alert criteria is based"
+          }
+        }
+      },
+      "OverrideBodyOverrideDetails" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "The identifier of the override."
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "The actual override message."
+          },
+          "code" : {
+            "type" : "string",
+            "description" : "The code related to override message."
+          },
+          "options" : {
+            "type" : "array",
+            "description" : "The usable options for the override.",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "The type of the override."
+          }
+        }
+      },
+      "ScreenErrorResponseBodyErrorDetails" : {
+        "type" : "object",
+        "properties" : {
+          "fieldName" : {
+            "type" : "string",
+            "description" : "The name of the field"
+          },
+          "code" : {
+            "type" : "string",
+            "description" : "The identifier of the error message"
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "The actual t24 error message "
+          }
+        }
+      },
+      "BusinessScreenErrorResponseBodyErrorDetails" : {
+        "type" : "object",
+        "properties" : {
+          "fieldName" : {
+            "type" : "string",
+            "description" : "The name of the field"
+          },
+          "code" : {
+            "type" : "string",
+            "description" : "The identifier of the error message"
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "The actual t24 error message for bad requests"
+          }
+        }
+      },
+      "SystemScreenErrorResponseBodyErrorDetails" : {
+        "type" : "object",
+        "properties" : {
+          "fieldName" : {
+            "type" : "string",
+            "description" : "The name of the field"
+          },
+          "code" : {
+            "type" : "string",
+            "description" : "The identifier of the error message"
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "The actual t24 error message caused by server"
+          }
+        }
+      }
+    },
+    "securitySchemes" : {
+      "basicAuth" : {
+        "type" : "http",
+        "scheme" : "basic"
+      },
+      "apiKey" : {
+        "type" : "apiKey",
+        "name" : "Authorization",
+        "in" : "header"
+      }
+    }
+  },
+  "x-original-swagger-version" : "2.0"
+}
