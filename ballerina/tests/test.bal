@@ -19,6 +19,7 @@ import ballerina/io;
 
 configurable ApiKeysConfig apiKeyConfig = ?;
 configurable string serviceUrl = "https://api.temenos.com/api/v1.1.0/holdings";
+configurable string accountId = "65846";
 
 
 ConnectionConfig config = {
@@ -28,13 +29,29 @@ ConnectionConfig config = {
 final Client temenos = check new Client(config, serviceUrl);
 
 @test:Config {
-    groups: ["get_test1"]
+    groups: ["testGetExternalSubscriptions"]
 }
 isolated function testGetExternalSubscriptions() returns error? {
     ExternalSubscribersAlertRequestsResponse|error response = temenos->/arrangements/alertRequests/externalSubscriptions.get();
     if response is ExternalSubscribersAlertRequestsResponse {
         io:println("Success Response: ", response);
         test:assertTrue(response is ExternalSubscribersAlertRequestsResponse, "Response failed");
+        test:assertTrue(response.header?.status == "success", "Response status is not success");
+    } else {
+        // io:println("Error Response: ", response.message());
+        test:assertFail("Test failed with error: " + response.message());
+    }
+}
+
+
+@test:Config {
+    groups: ["testGetEligibleAccountAlerts"]
+}
+isolated function testGetEligibleAccountAlerts() returns error? {
+    EligibleEventsResponse|error response = temenos->/accounts/[accountId]/alertEvents.get();
+    if response is EligibleEventsResponse {
+        io:println("Success Response: ", response);
+        test:assertTrue(response is EligibleEventsResponse, "Response failed");
         test:assertTrue(response.header?.status == "success", "Response status is not success");
     } else {
         // io:println("Error Response: ", response.message());
