@@ -20,6 +20,7 @@ import ballerina/io;
 configurable ApiKeysConfig apiKeyConfig = ?;
 configurable string serviceUrl = "https://api.temenos.com/api/v1.1.0/holdings";
 configurable string accountId = "65846";
+configurable string arrangementId = "AA250791W7FZ";
 
 
 ConnectionConfig config = {
@@ -52,6 +53,21 @@ isolated function testGetEligibleAccountAlerts() returns error? {
     if response is EligibleEventsResponse {
         io:println("Success Response: ", response);
         test:assertTrue(response is EligibleEventsResponse, "Response failed");
+        test:assertTrue(response.header?.status == "success", "Response status is not success");
+    } else {
+        // io:println("Error Response: ", response.message());
+        test:assertFail("Test failed with error: " + response.message());
+    }
+}
+
+@test:Config {
+    groups: ["testGetSubscribedAlertDetailsforArrangements"]
+}
+isolated function testGetSubscribedAlertDetailsforArrangements() returns error? {
+    SubscribedAlertsResponse|error response = temenos->/arrangements/[arrangementId]/alertRequests.get();
+    if response is SubscribedAlertsResponse {
+        io:println("Success Response: ", response);
+        test:assertTrue(response is SubscribedAlertsResponse, "Response failed");
         test:assertTrue(response.header?.status == "success", "Response status is not success");
     } else {
         // io:println("Error Response: ", response.message());
